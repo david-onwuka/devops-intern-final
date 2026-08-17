@@ -1,5 +1,7 @@
 # DevOps Intern Final Assessment
 
+![CI](https://github.com/YOUR-GITHUB-USERNAME/devops-intern-final/actions/workflows/ci.yml/badge.svg)
+
 *Name:* David Onwuka  
 *Date:* August 17, 2026
 
@@ -35,4 +37,4 @@ devops-intern-final/
 ├── nomad/
 │   └── hello.nomad
 └── monitoring/
-    └── loki_setup.txt# devops-intern-final
+    └── loki_setup.txt
