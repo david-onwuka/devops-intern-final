@@ -7,8 +7,9 @@
 
 ## Project Description
 
-This project demonstrates a basic DevOps workflow using Linux, Git, GitHub,
-Docker, GitHub Actions, Nomad, and Grafana Loki.
+This project demonstrates a basic DevOps workflow using Linux, Bash, Git, GitHub, Docker, GitHub Actions, Nomad, Grafana Loki, and Python.
+
+The project covers source code management, Linux scripting, containerization, continuous integration, container deployment, and log aggregation.
 
 ## Technologies Used
 
@@ -16,11 +17,11 @@ Docker, GitHub Actions, Nomad, and Grafana Loki.
 - Bash
 - Git
 - GitHub
+- Python
 - Docker
 - GitHub Actions
 - Nomad
 - Grafana Loki
-- Python
 
 ## Project Structure
 
