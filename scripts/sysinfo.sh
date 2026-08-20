@@ -1,4 +1,7 @@
 #!/bin/bash
+set -euo pipefail
+
+echo "===== System Information ====="
 
 echo "Current user:"
 whoami
