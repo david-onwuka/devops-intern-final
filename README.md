@@ -1,7 +1,6 @@
 DevOps Intern Final Assessment
 
-"CI" (https://github.com/david-onwuka/devops-intern-final/actions/workflows/ci.yml/badge.svg)
-
+![CI](https://github.com/david-onwuka/devops-intern-final/actions/workflows/ci.yml/badge.svg)
 Name: David Onwuka
 Date: August 20, 2026
 
