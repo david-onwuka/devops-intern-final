@@ -1,19 +1,25 @@
-Grafana Loki Setup
-==================
+GRAFANA LOKI + PROMTAIL SETUP
+==============================
 
-Loki can be started locally using Docker.
+Goal:
+Forward the devops-hello Docker container logs to Loki and query the
+logs back using LogQL.
 
-Start Loki:
+1. START LOKI AND PROMTAIL
+---------------------------
 
-docker run -d --name loki -p 3100:3100 grafana/loki:latest
+From the monitoring/ directory:
 
-Check that Loki is running:
+docker compose up -d
+
+This starts:
+
+- Loki on port 3100
+- Promtail on port 9080
+
+Check that the containers are running:
 
 docker ps
-
-Check Loki logs:
-
-docker logs loki
 
 Check that Loki is ready:
 
@@ -23,5 +29,83 @@ Expected response:
 
 ready
 
-Loki runs locally on port 3100 and is used as the log aggregation
-component for this DevOps project.
+
+2. BUILD AND RUN THE APPLICATION
+---------------------------------
+
+From the project root directory:
+
+docker build -t devops-hello:latest .
+
+Run the application:
+
+docker run --name devops-hello devops-hello:latest
+
+Check the application log:
+
+docker logs devops-hello
+
+Expected output:
+
+Hello, DevOps!
+
+
+3. LOG FORWARDING
+-----------------
+
+Promtail reads Docker container logs from:
+
+/var/lib/docker/containers/
+
+Promtail forwards the logs to Loki through:
+
+http://loki:3100/loki/api/v1/push
+
+The devops-hello container is identified using the container label.
+
+
+4. QUERY LOGS FROM LOKI
+------------------------
+
+Query Loki using LogQL:
+
+curl -G -s "http://localhost:3100/loki/api/v1/query_range" \
+  --data-urlencode 'query={container="devops-hello"}' \
+  --data-urlencode 'limit=10'
+
+The response should contain the log line:
+
+Hello, DevOps!
+
+
+5. STOP THE STACK
+-----------------
+
+docker compose down
+
+Remove the application container:
+
+docker rm devops-hello
+
+
+6. RESULT
+---------
+
+The completed logging flow is:
+
+devops-hello container
+        |
+        v
+Docker container logs
+        |
+        v
+Promtail
+        |
+        v
+Loki
+        |
+        v
+LogQL query
+
+This demonstrates actual log forwarding and retrieval rather than only
+checking whether Loki is running.
