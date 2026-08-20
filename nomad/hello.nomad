@@ -1,6 +1,6 @@
 job "hello-devops" {
   datacenters = ["dc1"]
-  type = "service"
+  type        = "batch"
 
   group "hello" {
     count = 1
@@ -9,7 +9,7 @@ job "hello-devops" {
       driver = "docker"
 
       config {
-        image = "devops-hello"
+        image = "devops-hello:latest"
       }
 
       resources {
