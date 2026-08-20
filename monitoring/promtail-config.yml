@@ -16,4 +16,5 @@ scrape_configs:
         labels:
           job: devops-hello
           container: devops-hello
-          _path_: /var/lib/docker/containers//-json.log
+          __path__: /var/lib/docker/containers/*/
+  *-json.log
