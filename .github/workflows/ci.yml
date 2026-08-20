@@ -1,4 +1,4 @@
-name: CI
+name: DevOps CI
 
 on:
   push:
@@ -17,5 +17,22 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run hello.py
-        run: python hello.py
+      - name: Run Python application
+        run: |
+          output=$(python hello.py)
+          test "$output" = "Hello, DevOps!"
+          echo "$output"
+
+      - name: Test shell script
+        run: |
+          chmod +x scripts/sysinfo.sh
+          ./scripts/sysinfo.sh
+
+      - name: Build Docker image
+        run: docker build -t devops-hello:latest .
+
+      - name: Run Docker container
+        run: |
+          output=$(docker run --rm devops-hello:latest)
+          test "$output" = "Hello, DevOps!"
+          echo "$output"
